@@ -15,9 +15,9 @@ import android.widget.TextView;
 import java.util.List;
 
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
+public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.MovieViewHolder> {
 
-    private List<Movie> movies;
+    private List<news> news;
     private int rowLayout;
     private Context context;
 
@@ -40,15 +40,15 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         }
     }
 
-    public MoviesAdapter(List<Movie> movies, int rowLayout, Context context) {
-        this.movies = movies;
+    public RecycleViewAdapter(List<news> news, int rowLayout, Context context) {
+        this.news = news;
         this.rowLayout = rowLayout;
         this.context = context;
     }
 
     @Override
-    public MoviesAdapter.MovieViewHolder onCreateViewHolder(ViewGroup parent,
-                                                            int viewType) {
+    public RecycleViewAdapter.MovieViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                 int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(rowLayout, parent, false);
         return new MovieViewHolder(view);
     }
@@ -56,14 +56,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, final int position) {
-        holder.movieTitle.setText(movies.get(position).getTitle());
-        holder.data.setText(movies.get(position).getReleaseDate());
-        holder.movieDescription.setText(movies.get(position).getOverview());
-        holder.rating.setText(movies.get(position).getVoteAverage().toString());
+        holder.movieTitle.setText(news.get(position).getTitle());
+        holder.data.setText(news.get(position).getTitle());
+        holder.movieDescription.setText(news.get(position).getSourcename());
+        holder.rating.setText(news.get(position).getId().toString());
     }
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return news.size();
     }
 }

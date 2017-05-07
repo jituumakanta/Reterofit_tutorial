@@ -50,4 +50,9 @@ public class MoviesResponse {
     public void setTotalPages(int totalPages) {
         this.totalPages = totalPages;
     }
+
+
+
+
+
 }

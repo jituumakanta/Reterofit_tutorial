@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     // TODO - insert your themoviedb.org API KEY here
-    private final static String API_KEY = "f8a29713551517de92be525a79762b6c";
+    //private final static String API_KEY = "f8a29713551517de92be525a79762b6c";
+    private final static String API_KEY = "2";
 
 
     @Override
@@ -34,20 +35,19 @@ public class MainActivity extends AppCompatActivity {
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.movies_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
-        call.enqueue(new Callback<MoviesResponse>() {
+        Call<newsresponse> call = apiService.getTopRatedMovies(API_KEY);
+        call.enqueue(new Callback<newsresponse>() {
             @Override
-            public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+            public void onResponse(Call<newsresponse> call, Response<newsresponse> response) {
                 int statusCode = response.code();
-                List<Movie> movies = response.body().getResults();
-                recyclerView.setAdapter(new MoviesAdapter(movies, R.layout.list_item_movie, getApplicationContext()));
+                List<news> movies = response.body().getArticles();
+                recyclerView.setAdapter(new RecycleViewAdapter(movies, R.layout.list_item_movie, getApplicationContext()));
             }
 
             @Override
-            public void onFailure(Call<MoviesResponse> call, Throwable t) {
+            public void onFailure(Call<newsresponse> call, Throwable t) {
                 // Log error here since request failed
                 Log.e(TAG, t.toString());
             }

@@ -13,9 +13,13 @@ import retrofit2.http.Query;
 
 
 public interface ApiInterface {
-    @GET("movie/top_rated")
-    Call<MoviesResponse> getTopRatedMovies(@Query("api_key") String apiKey);
+    @GET("news/z_get_news_ent.php")
+    Call<newsresponse> getTopRatedMovies(@Query("page") String apiKey);
+   /*@GET("news/z_get_news_ent.php")
+   Call<newsresponse> getTopRatedMovies(@Query("page") String apiKey);*/
 
-    @GET("movie/{id}")
-    Call<MoviesResponse> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);
+    /*@GET("movie/{id}")
+    Call<MoviesResponse> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);*/
+   /* @GET("news/{id}")
+    Call<MoviesResponse> getMovieDetails(@Path("id") int id, @Query("page") String apiKey);*/
 }
