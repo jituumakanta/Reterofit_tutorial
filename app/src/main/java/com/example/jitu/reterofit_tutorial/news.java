@@ -32,6 +32,8 @@ public class news {
     @SerializedName("totallikes")
     private String totallikes;
 
+    @SerializedName("w")
+    private String w;
 
 
     public news(String sourcename,String pagelink, String title, Integer id, String imagelink,String sourceicon,String body,String time,String totalviews,String totallikes) {

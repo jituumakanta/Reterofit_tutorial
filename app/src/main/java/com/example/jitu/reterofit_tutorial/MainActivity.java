@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     // TODO - insert your themoviedb.org API KEY here
     //private final static String API_KEY = "f8a29713551517de92be525a79762b6c";
     private final static String API_KEY = "2";
-
+    RecyclerView.Adapter adapter;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +33,32 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.movies_recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.movies_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        retrocall();
+       /* ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<newsresponse> call = apiService.getTopRatedMovies(API_KEY);
+        call.enqueue(new Callback<newsresponse>() {
+            @Override
+            public void onResponse(Call<newsresponse> call, Response<newsresponse> response) {
+                int statusCode = response.code();
+                List<news> movies = response.body().getArticles();
+                //recyclerView.setAdapter(new RecycleViewAdapter(movies, R.layout.list_item_movie, getApplicationContext()));
+                adapter = new CardAdapter1(movies, getApplicationContext());
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<newsresponse> call, Throwable t) {
+                // Log error here since request failed
+                Log.e(TAG, t.toString());
+            }
+        });*/
+    }
+
+    public void retrocall() {
+
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
@@ -43,7 +68,9 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<newsresponse> call, Response<newsresponse> response) {
                 int statusCode = response.code();
                 List<news> movies = response.body().getArticles();
-                recyclerView.setAdapter(new RecycleViewAdapter(movies, R.layout.list_item_movie, getApplicationContext()));
+                //recyclerView.setAdapter(new RecycleViewAdapter(movies, R.layout.list_item_movie, getApplicationContext()));
+                adapter = new CardAdapter1(movies, getApplicationContext());
+                recyclerView.setAdapter(adapter);
             }
 
             @Override
@@ -52,5 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, t.toString());
             }
         });
+
     }
 }

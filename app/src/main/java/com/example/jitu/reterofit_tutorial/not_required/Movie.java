@@ -1,4 +1,4 @@
-package com.example.jitu.reterofit_tutorial;
+package com.example.jitu.reterofit_tutorial.not_required;
 
 /**
  * Created by jitu on 5/8/2017.
