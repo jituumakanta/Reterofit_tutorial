@@ -62,12 +62,15 @@ public class MainActivity extends AppCompatActivity {
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<newsresponse> call = apiService.getTopRatedMovies(API_KEY);
+        Call<newsresponse> call = apiService.getTopRatedMovies("2","news_cricket");
         call.enqueue(new Callback<newsresponse>() {
             @Override
             public void onResponse(Call<newsresponse> call, Response<newsresponse> response) {
                 int statusCode = response.code();
                 List<news> movies = response.body().getArticles();
+                for(int i=0;i<movies.size();i++){
+                    System.out.println("lll: "+movies.get(i).getImagelink());
+                }
                 //recyclerView.setAdapter(new RecycleViewAdapter(movies, R.layout.list_item_movie, getApplicationContext()));
                 adapter = new CardAdapter1(movies, getApplicationContext());
                 recyclerView.setAdapter(adapter);
